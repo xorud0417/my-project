@@ -1,8 +1,15 @@
-# my-project
-Project: KGGB Guided Weapon Simulation
+Project: Efficient Circular Queue for Embedded Systems
 
-  -목적: 유도무기 통신 데이터 무결성 검증 로직 구현
+1. 목적
 
-  -핵심 기술: C Struct, Union, Pointer Casting, Checksum Algorithm
+자원이 제한된 임베디드/방산 시스템 환경에서 malloc 없이 동작하는 정적 메모리 기반 버퍼 구현.
 
-  -군 경력 연계: 항공탄약정비 경험을 바탕으로 실무 데이터 규격 모사
+UDP 통신 등 실시간 데이터 스트리밍 상황에서의 데이터 유실 방지 및 처리 지연 최소화.
+
+2. 주요 특징
+
+Zero Dynamic Allocation: 힙(Heap) 메모리를 사용하지 않아 메모리 누수 위험 제거.
+
+Modulo Arithmetic: 나머지 연산자를 이용한 효율적인 인덱스 순환.
+
+Boundary Check: Queue Full/Empty 예외 처리를 통한 시스템 안정성 확보.
