@@ -1,61 +1,68 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-typedef struct {
-    int id;
-    float distance;
-} Target;
+#define MAX_SIZE 5  // 테스트를 위해 크기를 5로 작게 잡았습니다.
 
+// 1. 구조체 설계
+struct CircularQueue {
+    int data[MAX_SIZE];
+    int front;
+    int rear;
+    int count;
+};
+
+// 2. 초기화 함수
+void initQueue(struct CircularQueue *q) {
+    q->front = 0;
+    q->rear = 0;
+    q->count = 0;
+}
+
+// 3. 데이터 넣기 (Enqueue)
+void enqueue(struct CircularQueue *q, int value) {
+    if (q->count == MAX_SIZE) {
+        printf("[경고] 큐가 가득 찼습니다! (%d 삽입 실패)\n", value);
+        return;
+    }
+    q->data[q->rear] = value;
+    q->rear = (q->rear + 1) % MAX_SIZE;
+    q->count++;
+    printf("-> %d 삽입 완료 (현재 개수: %d)\n", value, q->count);
+}
+
+// 4. 데이터 빼기 (Dequeue)
+int dequeue(struct CircularQueue *q) {
+    if (q->count == 0) {
+        printf("[에러] 큐가 비어있습니다!\n");
+        return -1;
+    }
+    int extracted = q->data[q->front];
+    q->front = (q->front + 1) % MAX_SIZE;
+    q->count--;
+    return extracted;
+}
+
+// 5. 메인 함수 (시뮬레이션)
 int main() {
-    int max_targets = 3;
-    // Target 구조체 주소 3개를 담을 수 있는 포인터 배열 (레이더 슬롯)
-    Target *radar_slots[3] = { NULL, NULL, NULL };
+    struct CircularQueue myQueue;
+    initQueue(&myQueue);
 
-    printf("=== 레이더 시스템 가동 ===\n");
+    printf("--- 데이터 삽입 단계 ---\n");
+    enqueue(&myQueue, 10);
+    enqueue(&myQueue, 20);
+    enqueue(&myQueue, 30);
+    enqueue(&myQueue, 40);
+    enqueue(&myQueue, 50);
+    enqueue(&myQueue, 60); // 가득 차서 실패하는 모습을 보여줍니다.
 
-    // 1. 첫 번째 타겟 탐지 (메모리 할당)
-    radar_slots[0] = (Target *)malloc(sizeof(Target));
-    if (radar_slots[0] != NULL) {
-        radar_slots[0]->id = 101;
-        radar_slots[0]->distance = 50.5f;
-        printf("[탐지] 타겟 %d가 %.1fkm 지점에서 발견되었습니다.\n", radar_slots[0]->id, radar_slots[0]->distance);
+    printf("\n--- 데이터 추출 단계 ---\n");
+    for(int i = 0; i < 3; i++) {
+        int val = dequeue(&myQueue);
+        if(val != -1) printf("<- %d 추출 완료\n", val);
     }
 
-    // 2. 두 번째 타겟 탐지
-    radar_slots[1] = (Target *)malloc(sizeof(Target));
-    if (radar_slots[1] != NULL) {
-        radar_slots[1]->id = 202;
-        radar_slots[1]->distance = 120.3f;
-        printf("[탐지] 타겟 %d가 %.1fkm 지점에서 발견되었습니다.\n", radar_slots[1]->id, radar_slots[1]->distance);
-    }
-    
-    radar_slots[2] = (Target *)malloc(sizeof(Target));
-    if (radar_slots[2] != NULL){
-        radar_slots[2]->id = 303;
-        radar_slots[2]->distance = 67.5f;
-        printf("타켓 %d가 %.1fkm 지점에서 발견되었습니다.\n", radar_slots[2]->id , radar_slots[2]->distance);
-    }
-
-    // 3. 첫 번째 타겟 격추 (메모리 해제 및 NULL 처리)
-    printf("\n--- 타겟 %d 격추 시도 ---\n", radar_slots[0]->id);
-    free(radar_slots[0]);
-    radar_slots[0] = NULL; // 댕글링 포인터 방지 
-    printf("[알림] 타겟 메모리가 안전하게 해제되었습니다.\n");
-
-    // 4. 현재 레이더 슬롯 상태 점검
-    printf("\n=== 현재 레이더 가동 현황 ===\n");
-    for (int i = 0; i < max_targets; i++) {
-        if (radar_slots[i] != NULL) {
-            printf("Slot[%d]: 타겟 %d (거리: %.1fkm)\n", i, radar_slots[i]->id, radar_slots[i]->distance);
-        } else {
-            printf("Slot[%d]: 비어 있음 (대기 중)\n", i);
-        }
-    }
-
-    // 남은 메모리 모두 정리 
-    for (int i = 0; i < max_targets; i++) {
-        if (radar_slots[i] != NULL) free(radar_slots[i]);
-    }
+    printf("\n--- 다시 삽입 (원형 회전 확인) ---\n");
+    enqueue(&myQueue, 70);
+    enqueue(&myQueue, 80);
 
     return 0;
 }
