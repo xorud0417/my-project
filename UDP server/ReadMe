@@ -1,0 +1,25 @@
+# 🛡️ Defense-SW: Basic UDP Communication
+본 프로젝트는 방위산업 소프트웨어(Defense SW)의 기초인 **UDP 프로토콜**을 활용한 데이터 수신 및 전송 시스템의 초기 모델입니다. 
+
+## 🚀 프로젝트 개요
+실시간 센서 데이터(레이더, GPS 등) 처리를 모사하기 위해 비연결형 프로토콜인 **UDP(User Datagram Protocol)**를 선택하여 서버-클라이언트 모델을 구축했습니다. 
+
+- **Server**: 특정 포트(9000)를 점유하여 외부로부터 들어오는 데이터 패킷을 대기하고 수신합니다.
+- **Client**: 수신측 IP 주소와 포트 번호를 기반으로 방산 규격 데이터를 모사한 문자열 패킷을 전송합니다.
+
+## 🛠️ 개발 환경 및 도구
+- **Language**: C (Standard C11)
+- **Environment**: Linux (Ubuntu 22.04 LTS / Arkain Cloud IDE)
+- **Tools**: GCC, Git, Linux Terminal
+- **Special Note**: 군 복무 중 사지방(공용 PC) 환경에서 Cloud IDE를 활용하여 개발 및 형상 관리를 수행함.
+
+## 📂 파일 구조
+- `server.c`: Linux Socket API 기반 UDP 수신 서버
+- `client.c`: 데이터 전송 테스트용 클라이언트
+
+## ⚙️ 실행 방법 (Linux/Arkain 기준)
+
+### 1. 서버 실행
+```bash
+gcc -o server server.c
+./server
