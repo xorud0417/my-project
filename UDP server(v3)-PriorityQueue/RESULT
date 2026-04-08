@@ -1,0 +1,60 @@
+--CLIENT-- RESULT
+
+[data, pop, status, exit]: data
+ID: 101
+Priority (1:High, 3:Low): 1
+X, Y: 12,52
+Description: 1st
+
+[data, pop, status, exit]: data
+ID: 102
+Priority (1:High, 3:Low): 3
+X, Y: 14,12
+Description: 2nd
+
+[data, pop, status, exit]: data
+ID: 103
+Priority (1:High, 3:Low): 2
+X, Y: 14,52
+Description: 3rd
+
+[data, pop, status, exit]: status
+
+[data, pop, status, exit]: pop
+
+[data, pop, status, exit]: status
+
+[data, pop, status, exit]: pop
+
+[data, pop, status, exit]: status
+
+[data, pop, status, exit]: pop
+
+[data, pop, status, exit]: pop
+
+
+--SERVER--  RESULT
+
+🛡️ 전술 우선순위 관제 서버 가동...
+🎯 [Detected] ID:101 (우선순위:1) 탐지 및 정렬 완료
+🎯 [Detected] ID:102 (우선순위:3) 탐지 및 정렬 완료
+🎯 [Detected] ID:103 (우선순위:2) 탐지 및 정렬 완료
+
+--- 🛰️ 실시간 위협 순위 보고 ---
+[1순위 대기] ID:101 | 위협등급:1 | 비고:1st
+[2순위 대기] ID:102 | 위협등급:3 | 비고:2nd
+[3순위 대기] ID:103 | 위협등급:2 | 비고:3rd
+-------------------------------
+🔥 [Action] 최우선 타겟 처리: ID:101 | 등급:1 | 위치:(12.0, 0.0)
+
+--- 🛰️ 실시간 위협 순위 보고 ---
+[1순위 대기] ID:103 | 위협등급:2 | 비고:3rd
+[2순위 대기] ID:102 | 위협등급:3 | 비고:2nd
+-------------------------------
+🔥 [Action] 최우선 타겟 처리: ID:103 | 등급:2 | 위치:(14.0, 0.0)
+
+--- 🛰️ 실시간 위협 순위 보고 ---
+[1순위 대기] ID:102 | 위협등급:3 | 비고:2nd
+-------------------------------
+🔥 [Action] 최우선 타겟 처리: ID:102 | 등급:3 | 위치:(14.0, 0.0)
+ℹ️ 현재 대기 중인 위협이 없습니다.
