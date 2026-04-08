@@ -1,0 +1,60 @@
+--CLIENT--  RESULT
+[add, del, show, exit]: add
+Target ID to Add: 101
+X, Y Coordinates: 12,14
+>> Request sent: add
+
+[add, del, show, exit]: add
+Target ID to Add: 103
+X, Y Coordinates: 42,12
+>> Request sent: add
+
+
+[add, del, show, exit]: add
+Target ID to Add: 104
+X, Y Coordinates: 21,42
+>> Request sent: add
+
+[add, del, show, exit]: add
+Target ID to Add: 106
+X, Y Coordinates: 12,42
+>> Request sent: add
+
+
+[add, del, show, exit]: del
+Target ID to Delete: 104
+>> Request sent: del
+
+[add, del, show, exit]: show
+>> Request sent: show
+
+
+[add, del, show, exit]: del
+Target ID to Delete: 103
+>> Request sent: del
+
+[add, del, show, exit]: show
+>> Request sent: show
+
+
+
+--SERVER-- RESULT
+
+ Static Memory Pool Server (UDP 9000) Started...
+✅ [Added] ID:101 (Pool Index:0)
+✅ [Added] ID:103 (Pool Index:1)
+✅ [Added] ID:104 (Pool Index:2)
+✅ [Added] ID:106 (Pool Index:3)
+🗑️ [Deleted] ID:104 (Index:2 반납)
+
+--- 🛰️ Tactical Display (Linked List) ---
+[ID:106] Pos:(12.0, 0.0) -> Next:1
+[ID:103] Pos:(42.0, 0.0) -> Next:0
+[ID:101] Pos:(12.0, 0.0) -> Next:-1
+----------------------------------------
+🗑️ [Deleted] ID:103 (Index:1 반납)
+
+--- 🛰️ Tactical Display (Linked List) ---
+[ID:106] Pos:(12.0, 0.0) -> Next:0
+[ID:101] Pos:(12.0, 0.0) -> Next:-1
+----------------------------------------
